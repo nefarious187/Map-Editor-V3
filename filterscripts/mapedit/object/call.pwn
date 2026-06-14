@@ -617,3 +617,19 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 #if defined obj_OnDialogResponse
     forward obj_OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]);
 #endif
+
+#if defined OnPlayerEditObject
+    #undef OnPlayerEditObject
+#endif
+public OnPlayerEditDynamicObject(playerid, objectid, response, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz) {
+    return OnPlayerEditObject(playerid, 0, objectid, response, x, y, z, rx, ry, rz);
+}
+#define OnPlayerEditObject obj_OnPlayerEditObject
+
+#if defined OnPlayerSelectObject
+    #undef OnPlayerSelectObject
+#endif
+public OnPlayerSelectDynamicObject(playerid, objectid, modelid, Float:x, Float:y, Float:z) {
+    return OnPlayerSelectObject(playerid, SELECT_OBJECT_GLOBAL_OBJECT, objectid, modelid, x, y, z);
+}
+#define OnPlayerSelectObject obj_OnPlayerSelectObject

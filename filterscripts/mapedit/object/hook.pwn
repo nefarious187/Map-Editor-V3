@@ -1,5 +1,8 @@
 stock h_CreateObject(modelid, Float:X, Float:Y, Float:Z, Float:rX, Float:rY, Float:rZ, Float:DrawDistance = 0.0) {
-    new objectid = CreateObject(modelid, X, Y, Z, rX, rY, rZ, DrawDistance);
+    new objectid = CreateDynamicObject(modelid, X, Y, Z, rX, rY, rZ, .drawdistance = DrawDistance);
+    if(objectid == 0) {
+        return INVALID_OBJECT_ID;
+    }
     if(objectid != INVALID_OBJECT_ID) {
         if( GetModelName(modelid, g_CommentString, sizeof g_CommentString) ) {
             strpack(g_ObjectData[objectid-1][OBJECT_DATA_COMMENT], g_CommentString, sizeof g_CommentString);
@@ -59,9 +62,9 @@ stock h_CreatePlayerObject(playerid, modelid, Float:X, Float:Y, Float:Z, Float:r
 
 
 stock h_DestroyObject(objectid) {
-    new isvalid = IsValidObject(objectid);
+    new isvalid = IsValidDynamicObject(objectid);
 
-    DestroyObject(objectid);
+    DestroyDynamicObject(objectid);
     
     if( isvalid ) {
         for(new playerid, max_playerid = GetPlayerPoolSize(); playerid <= max_playerid; playerid ++) {
@@ -142,9 +145,14 @@ stock h_DestroyPlayerObject(playerid, objectid) {
 
 
 stock h_SetObjectMaterial(objectid, materialindex, modelid, txdname[], texturename[], materialcolor) {
-    new success = SetObjectMaterial(objectid, materialindex, modelid, txdname, texturename, materialcolor);
+    new success = SetDynamicObjectMaterial(objectid, materialindex, modelid, txdname, texturename, materialcolor);
     if( success ) {
         g_ObjectData[objectid-1][OBJECT_DATA_MATINDEX_MODCOUNT] ++;
+        for(new p = 0, max_playerid = GetPlayerPoolSize(); p <= max_playerid; p++) {
+            if(IsPlayerConnected(p)) {
+                Streamer_Update(p);
+            }
+        }
     }
     return success;
 }
@@ -171,9 +179,14 @@ stock h_SetPlayerObjectMaterial(playerid, objectid, materialindex, modelid, txdn
 
 
 stock h_SetObjectMaterialText(objectid, text[], materialindex = 0, materialsize = OBJECT_MATERIAL_SIZE_256x128, fontface[] = "Arial", fontsize = 24, bold = 1, fontcolor = 0xFFFFFFFF, backcolor = 0, textalignment = 0) {
-    new success = SetObjectMaterialText(objectid, text, materialindex, materialsize, fontface, fontsize, bold, fontcolor, backcolor, textalignment);
+    new success = SetDynamicObjectMaterialText(objectid, materialindex, text, materialsize, fontface, fontsize, bold, fontcolor, backcolor, textalignment);
     if( success ) {
         g_ObjectData[objectid-1][OBJECT_DATA_MATINDEX_MODCOUNT] ++;
+        for(new p = 0, max_playerid = GetPlayerPoolSize(); p <= max_playerid; p++) {
+            if(IsPlayerConnected(p)) {
+                Streamer_Update(p);
+            }
+        }
     }
     return success;
 }
@@ -197,3 +210,72 @@ stock h_SetPlayerObjectMaterialText(playerid, objectid, text[], materialindex = 
     #define _ALS_SetPlayerObjMaterialText
 #endif
 #define SetPlayerObjectMaterialText h_SetPlayerObjectMaterialText
+
+
+stock h_SetObjectPos(objectid, Float:x, Float:y, Float:z) {
+    new success = SetDynamicObjectPos(objectid, x, y, z);
+    for(new p = 0, max_playerid = GetPlayerPoolSize(); p <= max_playerid; p++) {
+        if(IsPlayerConnected(p)) {
+            Streamer_Update(p);
+        }
+    }
+    return success;
+}
+#if defined _ALS_SetObjectPos
+    #undef SetObjectPos
+#else
+    #define _ALS_SetObjectPos
+#endif
+#define SetObjectPos h_SetObjectPos
+
+
+stock h_SetObjectRot(objectid, Float:rx, Float:ry, Float:rz) {
+    new success = SetDynamicObjectRot(objectid, rx, ry, rz);
+    for(new p = 0, max_playerid = GetPlayerPoolSize(); p <= max_playerid; p++) {
+        if(IsPlayerConnected(p)) {
+            Streamer_Update(p);
+        }
+    }
+    return success;
+}
+#if defined _ALS_SetObjectRot
+    #undef SetObjectRot
+#else
+    #define _ALS_SetObjectRot
+#endif
+#define SetObjectRot h_SetObjectRot
+
+
+stock h_AttachObjectToObject(objectid, attachtoid, Float:OffsetX, Float:OffsetY, Float:OffsetZ, Float:RotX, Float:RotY, Float:RotZ, SyncRotation = 1) {
+    new success = AttachDynamicObjectToObject(objectid, attachtoid, OffsetX, OffsetY, OffsetZ, RotX, RotY, RotZ, SyncRotation);
+    for(new p = 0, max_playerid = GetPlayerPoolSize(); p <= max_playerid; p++) {
+        if(IsPlayerConnected(p)) {
+            Streamer_Update(p);
+        }
+    }
+    return success;
+}
+#if defined _ALS_AttachObjectToObject
+    #undef AttachObjectToObject
+#else
+    #define _ALS_AttachObjectToObject
+#endif
+#define AttachObjectToObject h_AttachObjectToObject
+
+
+stock h_AttachObjectToVehicle(objectid, vehicleid, Float:OffsetX, Float:OffsetY, Float:OffsetZ, Float:RotX, Float:RotY, Float:RotZ) {
+    new success = AttachDynamicObjectToVehicle(objectid, vehicleid, OffsetX, OffsetY, OffsetZ, RotX, RotY, RotZ);
+    for(new p = 0, max_playerid = GetPlayerPoolSize(); p <= max_playerid; p++) {
+        if(IsPlayerConnected(p)) {
+            Streamer_Update(p);
+        }
+    }
+    return success;
+}
+#if defined _ALS_AttachObjectToVehicle
+    #undef AttachObjectToVehicle
+#else
+    #define _ALS_AttachObjectToVehicle
+#endif
+#define AttachObjectToVehicle h_AttachObjectToVehicle
+

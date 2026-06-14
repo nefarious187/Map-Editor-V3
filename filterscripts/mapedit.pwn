@@ -1,12 +1,26 @@
 #define SSCANF_NO_NICE_FEATURES
 
 #include <a_samp>
+#include <streamer>
 #include <sscanf2>
 #include <strlib> // Slice's strlib (NOT WESTIE'S!)
 
+#undef MAX_OBJECTS
+#define MAX_OBJECTS             10000
+
+#define IsValidObject           IsValidDynamicObject
+#define GetObjectPos            GetDynamicObjectPos
+#define GetObjectRot            GetDynamicObjectRot
+#define MoveObject              MoveDynamicObject
+#define StopObject              StopDynamicObject
+#define IsObjectMoving          IsDynamicObjectMoving
+#define AttachCameraToObject    AttachCameraToDynamicObject
+#define EditObject              EditDynamicObject
+#define GetObjectModel(%0)      Streamer_GetIntData(STREAMER_TYPE_OBJECT, %0, E_STREAMER_MODEL_ID)
+
 native IsValidVehicle(vehicleid);
 
-#pragma dynamic 19100 // To avoid warnings at compiling
+#pragma dynamic 100000 // To avoid warnings at compiling
 
 //------------------------------------------------------------------------------
 // Defined Values & Enumerators
@@ -270,6 +284,7 @@ public OnFilterScriptExit() {
 public OnPlayerConnect(playerid) {
 	DefaultPlayerData(playerid);
     EnablePlayerCameraTarget(playerid, true); // to enable look-selecting vehicles, objects, actors
+    Streamer_ToggleIdleUpdate(playerid, 1);
 
     #if defined core_OnPlayerConnect
         return core_OnPlayerConnect(playerid);
