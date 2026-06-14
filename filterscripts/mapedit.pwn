@@ -1,3 +1,5 @@
+#define SSCANF_NO_NICE_FEATURES
+
 #include <a_samp>
 #include <sscanf2>
 #include <strlib> // Slice's strlib (NOT WESTIE'S!)
@@ -232,6 +234,7 @@ public OnFilterScriptInit() {
     #if defined core_OnFilterScriptInit
         core_OnFilterScriptInit();
     #endif
+    return 1;
 }
 #if defined _ALS_OnFilterScriptInit
     #undef OnFilterScriptInit
