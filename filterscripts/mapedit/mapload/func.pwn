@@ -173,7 +173,7 @@ MapLoad(
             format(comment, sizeof comment, "no comment");
         }
 
-        if( strfind(func, "CreateObject") != -1 ) {
+        if( strfind(func, "CreateObject") != -1 || strfind(func, "CreateDynamicObject") != -1 ) {
             static
                 modelid,
                 Float:x,
@@ -296,7 +296,7 @@ MapLoad(
             actors_loaded ++;
         }
 
-        else if( strfind(func, "SetObjectMaterialText") != -1 ) {
+        else if( strfind(func, "SetObjectMaterialText") != -1 || strfind(func, "SetDynamicObjectMaterialText") != -1 ) {
             static
                 varname[MAX_MAPLOAD_VARNAME+1],
                 text[100],
@@ -312,11 +312,20 @@ MapLoad(
                 objectid
             ;
 
-            if(
-                sscanf(params, "p<,>s[31]s[100]I(0)S(90)[100]S(Arial)[100]I(24)I(1)H(0xFFFFFFFF)H(0x0)I(0)", varname, text, matindex, matsize_name, font, fontsize, isbold, fontcolor, backcolor, alignment) &&
-                sscanf(params, "p<,>s[31]s[100]I(0)S(90)[100]S(Arial)[100]I(24)I(1)I(-1)I(0)I(0)",           varname, text, matindex, matsize_name, font, fontsize, isbold, fontcolor, backcolor, alignment)
-            ) {
-                continue;
+            if( strfind(func, "SetDynamicObjectMaterialText") != -1 ) {
+                if(
+                    sscanf(params, "p<,>s[31]is[100]S(90)[100]S(Arial)[100]I(24)I(1)H(0xFFFFFFFF)H(0x0)I(0)", varname, matindex, text, matsize_name, font, fontsize, isbold, fontcolor, backcolor, alignment) &&
+                    sscanf(params, "p<,>s[31]is[100]S(90)[100]S(Arial)[100]I(24)I(1)I(-1)I(0)I(0)",           varname, matindex, text, matsize_name, font, fontsize, isbold, fontcolor, backcolor, alignment)
+                ) {
+                    continue;
+                }
+            } else {
+                if(
+                    sscanf(params, "p<,>s[31]s[100]I(0)S(90)[100]S(Arial)[100]I(24)I(1)H(0xFFFFFFFF)H(0x0)I(0)", varname, text, matindex, matsize_name, font, fontsize, isbold, fontcolor, backcolor, alignment) &&
+                    sscanf(params, "p<,>s[31]s[100]I(0)S(90)[100]S(Arial)[100]I(24)I(1)I(-1)I(0)I(0)",           varname, text, matindex, matsize_name, font, fontsize, isbold, fontcolor, backcolor, alignment)
+                ) {
+                    continue;
+                }
             }
 
             strtrim(varname, " ");
@@ -351,7 +360,7 @@ MapLoad(
             ApplyObjectMaterialIndexData(objectid, matindex);
         }
 
-        else if( strfind(func, "SetObjectMaterial") != -1 ) {
+        else if( strfind(func, "SetObjectMaterial") != -1 || strfind(func, "SetDynamicObjectMaterial") != -1 ) {
             static
                 varname[MAX_MAPLOAD_VARNAME+1],
                 matindex,
@@ -432,7 +441,7 @@ MapLoad(
             ChangeVehiclePaintjob(vehicleid, paintjobid);
         }
 
-        else if( strfind(func, "AttachObjectToObject") != -1 ) {
+        else if( strfind(func, "AttachObjectToObject") != -1 || strfind(func, "AttachDynamicObjectToDynamicObject") != -1 ) {
             static
                 varname[MAX_MAPLOAD_VARNAME+1],
                 attachto_varname[MAX_MAPLOAD_VARNAME+1],
@@ -474,7 +483,7 @@ MapLoad(
             ApplyObjectAttachData(objectid);
         }
 
-        else if( strfind(func, "AttachObjectToVehicle") != -1 ) {
+        else if( strfind(func, "AttachObjectToVehicle") != -1 || strfind(func, "AttachDynamicObjectToVehicle") != -1 ) {
             static
                 varname[MAX_MAPLOAD_VARNAME+1],
                 attachto_varname[MAX_MAPLOAD_VARNAME+1],
