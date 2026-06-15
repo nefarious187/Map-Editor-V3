@@ -120,6 +120,10 @@ public OnCamModeUpdate() {
             continue;
         }
 
+        new Float:cam_x, Float:cam_y, Float:cam_z;
+        GetPlayerCameraPos(playerid, cam_x, cam_y, cam_z);
+        Streamer_UpdateEx(playerid, cam_x, cam_y, cam_z, GetPlayerVirtualWorld(playerid), GetPlayerInterior(playerid));
+
         new keys, ud, lr;
         GetPlayerKeys(playerid, keys, ud, lr);
 

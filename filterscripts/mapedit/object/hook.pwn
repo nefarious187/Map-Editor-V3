@@ -20,6 +20,12 @@ stock h_CreateObject(modelid, Float:X, Float:Y, Float:Z, Float:rX, Float:rY, Flo
         for(new materialindex; materialindex < MAX_OBJECT_INDEX; materialindex ++) {
             g_ObjectData[objectid-1][OBJECT_DATA_MATINDEX_TYPE][materialindex] = MATERIALINDEX_TYPE_NONE;
         }
+
+        for(new p = 0, max_playerid = GetPlayerPoolSize(); p <= max_playerid; p++) {
+            if(IsPlayerConnected(p)) {
+                Streamer_Update(p);
+            }
+        }
     }
     return objectid;
 }
@@ -32,26 +38,7 @@ stock h_CreateObject(modelid, Float:X, Float:Y, Float:Z, Float:rX, Float:rY, Flo
 
 
 stock h_CreatePlayerObject(playerid, modelid, Float:X, Float:Y, Float:Z, Float:rX, Float:rY, Float:rZ, Float:DrawDistance = 0.0) {
-    new objectid = CreatePlayerObject(playerid, modelid, X, Y, Z, rX, rY, rZ, DrawDistance);
-    if( objectid != INVALID_OBJECT_ID ) {
-        if( GetModelName(modelid, g_CommentString, sizeof g_CommentString) ) {
-            strpack(g_ObjectData[objectid-1][OBJECT_DATA_COMMENT], g_CommentString, sizeof g_CommentString);
-        }
-
-        g_ObjectData[objectid-1][OBJECT_DATA_ATTACH_IDTYPE] = ID_TYPE_NONE;
-        g_ObjectData[objectid-1][OBJECT_DATA_ATTACH_X]  = 0.0;
-        g_ObjectData[objectid-1][OBJECT_DATA_ATTACH_Y]  = 0.0;
-        g_ObjectData[objectid-1][OBJECT_DATA_ATTACH_Z]  = 0.0;
-        g_ObjectData[objectid-1][OBJECT_DATA_ATTACH_RX] = 0.0;
-        g_ObjectData[objectid-1][OBJECT_DATA_ATTACH_RY] = 0.0;
-        g_ObjectData[objectid-1][OBJECT_DATA_ATTACH_RZ] = 0.0;
-
-        g_ObjectData[objectid-1][OBJECT_DATA_MATINDEX_MODCOUNT] = 0;
-        for(new materialindex; materialindex < MAX_OBJECT_INDEX; materialindex ++) {
-            g_ObjectData[objectid-1][OBJECT_DATA_MATINDEX_TYPE][materialindex] = MATERIALINDEX_TYPE_NONE;
-        }
-    }
-    return objectid;
+    return CreatePlayerObject(playerid, modelid, X, Y, Z, rX, rY, rZ, DrawDistance);
 }
 #if defined _ALS_CreatePlayerObject
     #undef CreatePlayerObject
@@ -165,10 +152,7 @@ stock h_SetObjectMaterial(objectid, materialindex, modelid, txdname[], texturena
 
 
 stock h_SetPlayerObjectMaterial(playerid, objectid, materialindex, modelid, txdname[], texturename[], materialcolor) {
-    SetPlayerObjectMaterial(playerid, objectid, materialindex, modelid, txdname, texturename, materialcolor);
-    if( IsValidPlayerObject(playerid, objectid) ) {
-        g_ObjectData[objectid-1][OBJECT_DATA_MATINDEX_MODCOUNT] ++;
-    }
+    return SetPlayerObjectMaterial(playerid, objectid, materialindex, modelid, txdname, texturename, materialcolor);
 }
 #if defined _ALS_SetPlayerObjectMaterial
     #undef SetPlayerObjectMaterial
@@ -199,10 +183,7 @@ stock h_SetObjectMaterialText(objectid, text[], materialindex = 0, materialsize 
 
 
 stock h_SetPlayerObjectMaterialText(playerid, objectid, text[], materialindex = 0, materialsize = OBJECT_MATERIAL_SIZE_256x128, fontface[] = "Arial", fontsize = 24, bold = 1, fontcolor = 0xFFFFFFFF, backcolor = 0, textalignment = 0) {
-    SetPlayerObjectMaterialText(playerid, objectid, text, materialindex, materialsize, fontface, fontsize, bold, fontcolor, backcolor, textalignment);
-    if( IsValidPlayerObject(playerid, objectid) ) {
-        g_ObjectData[objectid-1][OBJECT_DATA_MATINDEX_MODCOUNT] ++;
-    }
+    return SetPlayerObjectMaterialText(playerid, objectid, text, materialindex, materialsize, fontface, fontsize, bold, fontcolor, backcolor, textalignment);
 }
 #if defined _ALS_SetPlayerObjMaterialText
     #undef SetPlayerObjectMaterialText

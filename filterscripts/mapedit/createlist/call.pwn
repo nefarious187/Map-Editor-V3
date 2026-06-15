@@ -301,7 +301,11 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid) {
                 Float:distance
             ;
 
-            GetPlayerPos(playerid, x, y, z);
+            if( g_CamModeData[playerid][CAMMODE_DATA_TOGGLE] ) {
+                GetPlayerCameraPos(playerid, x, y, z);
+            } else {
+                GetPlayerPos(playerid, x, y, z);
+            }
 
             switch( g_PlayerData[playerid][PLAYER_DATA_TDMODE] ) {
                 case TDMODE_CREATELIST_OBJECT, TDMODE_CREATELIST_PICKUP: {
@@ -325,7 +329,7 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid) {
                         Float:size_x,
                         Float:size_y,
                         Float:size_z,
-                        Float:size_max
+                        Float:size_max = 0.0
                     ;
 
                     GetVehicleModelInfo(row_modelid, VEHICLE_MODEL_INFO_SIZE, size_x, size_y, size_z);
@@ -337,7 +341,7 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid) {
                     if( size_z > size_max )
                         size_max = size_z;
 
-                    distance = size_max + 1.0;
+                    distance = size_max + 4.0;
                 }
                 case TDMODE_CREATELIST_ACTOR: {
                     distance = 2.0;
