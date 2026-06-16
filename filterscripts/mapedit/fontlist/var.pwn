@@ -1,4 +1,4 @@
-enum {
+enum _:E_FONTLIST_GTD {
 	Text: FONTLIST_GTD_BG,
 	Text: FONTLIST_GTD_CLOSE,
 	Text: FONTLIST_GTD_PAGE_F,
@@ -8,7 +8,7 @@ enum {
 	MAX_FONTLIST_GTDS
 }
 
-enum {
+enum _:E_FONTLIST_PTD {
 	PlayerText: FONTLIST_PTD_CAPTION,
 	PlayerText: FONTLIST_PTD_PAGE,
 	PlayerText: FONTLIST_PTD_SEARCH,

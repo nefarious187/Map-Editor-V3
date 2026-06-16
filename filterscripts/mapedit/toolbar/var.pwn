@@ -1,4 +1,4 @@
-enum {
+enum _:E_TOOLBAR_TDS {
     Text: TD_TOOLBAR_BG,
 
     Text: TD_TOOLBAR_OBJECT_BG,

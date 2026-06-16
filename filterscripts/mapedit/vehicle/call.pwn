@@ -236,6 +236,8 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 
                         g_PlayerData[playerid][PLAYER_DATA_EDIT_IDTYPE] = ID_TYPE_VEHICLE;
                         g_PlayerData[playerid][PLAYER_DATA_EDIT_ID] = new_vehicleid;
+                        vehicleid = new_vehicleid;
+                        SelectList_FocusID(playerid, ID_TYPE_VEHICLE, new_vehicleid);
                     }
                 }
                 case LISTITEM_VEHICLE_RECREATE: {

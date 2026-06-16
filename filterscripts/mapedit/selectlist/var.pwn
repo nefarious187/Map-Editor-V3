@@ -1,4 +1,4 @@
-enum { // Generic Textdraws
+enum _:E_SELECTLIST_GTD { // Generic Textdraws
     Text: SELECTLIST_GTD_BG,          // Background
     Text: SELECTLIST_GTD_CLOSE,       // Close Button
     Text: SELECTLIST_GTD_PAGE_F,      // First Page
@@ -8,7 +8,7 @@ enum { // Generic Textdraws
           MAX_SELECTLIST_GTDS
 }
 
-enum { // Player Textdraws
+enum _:E_SELECTLIST_PTD { // Player Textdraws
     PlayerText: SELECTLIST_PTD_CAPTION,                           // Caption / Title
     PlayerText: SELECTLIST_PTD_PAGE,                              // Current Page / Input Button
     PlayerText: SELECTLIST_PTD_SEARCH,                            // Current Search / Input Button

@@ -775,3 +775,103 @@ ShowSelectListDialog(playerid, dialogid) {
     }
     return 1;
 }
+
+stock SelectList_FocusID(playerid, idtype, id) {
+    new search[MAX_SEARCH_LEN+1], search_int = -1, packed_search[MAX_SEARCH_LEN+1 char];
+    GetSelectListSearch(playerid, search, sizeof search);
+    sscanf(search, "i", search_int);
+    strpack(packed_search, search);
+
+    new match_idx = -1;
+    new match_count = 0;
+
+    switch(idtype) {
+        case ID_TYPE_OBJECT: {
+            for(new objectid = 1, modelid, cache_index; objectid <= MAX_OBJECTS; objectid ++) {
+                if( !IsValidObject(objectid) ) continue;
+                modelid = GetObjectModel(objectid);
+                cache_index = GetModelCacheIndex(modelid);
+                if( isempty(search) || search_int == objectid || search_int == modelid ||
+                    strfind(g_ObjectData[objectid-1][OBJECT_DATA_COMMENT], packed_search, true) != -1 ||
+                    ( cache_index != INVALID_ARRAY_INDEX && strfind(g_ModelCache[cache_index][MODEL_CACHE_NAME], packed_search, true) != -1 )
+                ) {
+                    if( objectid == id ) {
+                        match_idx = match_count;
+                        break;
+                    }
+                    match_count ++;
+                }
+            }
+            if( match_idx != -1 ) {
+                g_SelectObjListData[playerid][SELECTLIST_DATA_PAGE] = match_idx / MAX_SELECTLIST_ROWS;
+                g_SelectObjListData[playerid][SELECTLIST_DATA_EDIT_ROW] = match_idx % MAX_SELECTLIST_ROWS;
+                g_SelectObjListData[playerid][SELECTLIST_DATA_EDIT_VIEWED] = true;
+            }
+        }
+        case ID_TYPE_VEHICLE: {
+            for(new vehicleid = 1, max_vehicleid = GetVehiclePoolSize(), modelid, cache_idx; vehicleid <= max_vehicleid; vehicleid ++) {
+                if( !IsValidVehicle(vehicleid) ) continue;
+                modelid = GetVehicleModel(vehicleid);
+                cache_idx = GetVehicleModelCacheIndex(modelid);
+                if( isempty(search) || search_int == vehicleid || search_int == modelid ||
+                    strfind(g_VehicleData[vehicleid-1][VEHICLE_DATA_COMMENT], packed_search, true) != -1 ||
+                    ( cache_idx != INVALID_ARRAY_INDEX && strfind(g_VehModelNameCache[cache_idx], packed_search, true) != -1 )
+                ) {
+                    if( vehicleid == id ) {
+                        match_idx = match_count;
+                        break;
+                    }
+                    match_count ++;
+                }
+            }
+            if( match_idx != -1 ) {
+                g_SelectVehListData[playerid][SELECTLIST_DATA_PAGE] = match_idx / MAX_SELECTLIST_ROWS;
+                g_SelectVehListData[playerid][SELECTLIST_DATA_EDIT_ROW] = match_idx % MAX_SELECTLIST_ROWS;
+                g_SelectVehListData[playerid][SELECTLIST_DATA_EDIT_VIEWED] = true;
+            }
+        }
+        case ID_TYPE_ACTOR: {
+            for(new actorid = 0, max_actorid = GetActorPoolSize(), skinid; actorid <= max_actorid; actorid ++) {
+                if( !IsValidActor(actorid) ) continue;
+                skinid = g_ActorData[actorid][ACTOR_DATA_SKIN];
+                if( isempty(search) || search_int == actorid || search_int == skinid ||
+                    strfind(g_ActorData[actorid][ACTOR_DATA_COMMENT], packed_search, true) != -1 ||
+                    ( IsValidSkin(skinid) && strfind(g_SkinNameCache[skinid], packed_search, true) != -1 )
+                ) {
+                    if( actorid == id ) {
+                        match_idx = match_count;
+                        break;
+                    }
+                    match_count ++;
+                }
+            }
+            if( match_idx != -1 ) {
+                g_SelectActListData[playerid][SELECTLIST_DATA_PAGE] = match_idx / MAX_SELECTLIST_ROWS;
+                g_SelectActListData[playerid][SELECTLIST_DATA_EDIT_ROW] = match_idx % MAX_SELECTLIST_ROWS;
+                g_SelectActListData[playerid][SELECTLIST_DATA_EDIT_VIEWED] = true;
+            }
+        }
+        case ID_TYPE_PICKUP: {
+            for(new pickupid = 0, modelid, cache_index; pickupid < MAX_PICKUPS; pickupid ++) {
+                if( !g_PickupData[pickupid][PICKUP_DATA_ISVALID] ) continue;
+                modelid = g_PickupData[pickupid][PICKUP_DATA_MODEL];
+                cache_index = GetModelCacheIndex(modelid);
+                if( isempty(search) || search_int == pickupid || search_int == modelid ||
+                    strfind(g_PickupData[pickupid][PICKUP_DATA_COMMENT], packed_search, true) != -1 ||
+                    ( cache_index != INVALID_ARRAY_INDEX && strfind(g_ModelCache[cache_index][MODEL_CACHE_NAME], packed_search, true) != -1 )
+                ) {
+                    if( pickupid == id ) {
+                        match_idx = match_count;
+                        break;
+                    }
+                    match_count ++;
+                }
+            }
+            if( match_idx != -1 ) {
+                g_SelectPickListData[playerid][SELECTLIST_DATA_PAGE] = match_idx / MAX_SELECTLIST_ROWS;
+                g_SelectPickListData[playerid][SELECTLIST_DATA_EDIT_ROW] = match_idx % MAX_SELECTLIST_ROWS;
+                g_SelectPickListData[playerid][SELECTLIST_DATA_EDIT_VIEWED] = true;
+            }
+        }
+    }
+}

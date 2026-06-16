@@ -188,6 +188,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
 
                         g_PlayerData[playerid][PLAYER_DATA_EDIT_IDTYPE] = ID_TYPE_OBJECT;
                         g_PlayerData[playerid][PLAYER_DATA_EDIT_ID] = new_objectid;
+                        SelectList_FocusID(playerid, ID_TYPE_OBJECT, new_objectid);
                     }
                 }
                 case LISTITEM_OBJECT_RECREATE: {

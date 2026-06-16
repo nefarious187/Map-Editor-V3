@@ -1,4 +1,4 @@
-enum {
+enum _:E_ANIMLIST_GTD {
     Text: ANIMLIST_GTD_BG,
     Text: ANIMLIST_GTD_CAPTION,
     Text: ANIMLIST_GTD_CLOSE,
@@ -12,7 +12,7 @@ enum {
           MAX_ANIMLIST_GTDS
 }
 
-enum {
+enum _:E_ANIMLIST_PTD {
     PlayerText: ANIMLIST_PTD_SEARCH,
     PlayerText: ANIMLIST_PTD_PAGE,
     PlayerText: ANIMLIST_PTD_ROW_INDEX   [MAX_ANIMLIST_ROWS],

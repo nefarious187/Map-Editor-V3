@@ -1,4 +1,4 @@
-enum { // Model View Data
+enum _:MODELVIEW_DATA { // Model View Data
     bool:  MODELVIEW_DATA_TOGGLE,  // Is Toggled
            MODELVIEW_DATA_MODELID, // Model ID
     Float: MODELVIEW_DATA_RX,      // RX
@@ -10,10 +10,9 @@ enum { // Model View Data
     Float: MODELVIEW_DATA_RZS,     // RZ Speed
            MODELVIEW_DATA_VC1,     // Vehicle Color 1
            MODELVIEW_DATA_VC2,     // Vehicle Color 2
-           MAX_MODELVIEW_DATA
 }
 
-enum { // View Model Modifiers
+enum _:E_MODELVIEW_MODS { // View Model Modifiers
     Text: MODELVIEW_MOD_S2, // Subtract x2
     Text: MODELVIEW_MOD_S1, // Subtract x1
     Text: MODELVIEW_MOD_R,  // Reset
@@ -22,7 +21,7 @@ enum { // View Model Modifiers
           MAX_MODELVIEW_MODS
 }
 
-enum {
+enum _:E_MODELVIEW_GTD {
     Text: MODELVIEW_GTD_BG,                          // Background
     Text: MODELVIEW_GTD_CLOSE,                       // Close
     Text: MODELVIEW_GTD_CAPTION,                     // Caption
@@ -38,7 +37,7 @@ enum {
           MAX_MODELVIEW_GTDS
 }
 
-enum {
+enum _:E_MODELVIEW_PTD {
     PlayerText: MODELVIEW_PTD_MODEL, // Model
     PlayerText: MODELVIEW_PTD_RX,    // RX
     PlayerText: MODELVIEW_PTD_RY,    // RY
@@ -54,7 +53,7 @@ enum {
 
 new
                 g_ModelViewTimer, // Looping Update Timer
-                g_ModelViewData[MAX_PLAYERS][MAX_MODELVIEW_DATA],
+                g_ModelViewData[MAX_PLAYERS][MODELVIEW_DATA],
     Text:       g_ModelViewGTD [MAX_MODELVIEW_GTDS],
     PlayerText: g_ModelViewPTD [MAX_PLAYERS][MAX_MODELVIEW_PTDS]
 ;

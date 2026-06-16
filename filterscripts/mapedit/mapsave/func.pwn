@@ -230,7 +230,7 @@ SaveMap(
         strunpack(g_CommentString, g_PickupData[pickupid][PICKUP_DATA_COMMENT], MAX_COMMENT_LEN+1); // Get Comment
 
         format(write_string, sizeof write_string,
-            "%sPickup[%i] = CreatePickup(%i, 1, %.4f, %.4f, %.4f, -1); //%s\r\n", prefix, p, modelid, x, y, z, g_CommentString
+            "%sPickup[%i] = CreateDynamicPickup(%i, 1, %.4f, %.4f, %.4f, -1); //%s\r\n", prefix, p, modelid, x, y, z, g_CommentString
         );
         fwrite(file_handle, write_string);
     }
@@ -242,7 +242,7 @@ SaveMap(
         strunpack(g_CommentString, g_ActorData[actorid][ACTOR_DATA_COMMENT], MAX_COMMENT_LEN+1);
 
         format(write_string, sizeof write_string,
-            "%sActor[%i] = CreateActor(%i, %.4f, %.4f, %.4f, %.4f); //%s\r\n", prefix, a, g_ActorData[actorid][ACTOR_DATA_SKIN], x, y, z, r, g_CommentString
+            "%sActor[%i] = CreateDynamicActor(%i, %.4f, %.4f, %.4f, %.4f); //%s\r\n", prefix, a, g_ActorData[actorid][ACTOR_DATA_SKIN], x, y, z, r, g_CommentString
         );
         fwrite(file_handle, write_string);
 

@@ -1,5 +1,5 @@
 stock hook_CreateActor(modelid, Float:X, Float:Y, Float:Z, Float:Rotation) {
-    new actorid = CreateActor(modelid, Float:X, Float:Y, Float:Z, Float:Rotation);
+    new actorid = CreateDynamicActor(modelid, Float:X, Float:Y, Float:Z, Float:Rotation);
     if( actorid != INVALID_ACTOR_ID ) {
         g_ActorData[actorid][ACTOR_DATA_SKIN] = modelid;
 
@@ -20,7 +20,7 @@ stock hook_CreateActor(modelid, Float:X, Float:Y, Float:Z, Float:Rotation) {
 
 
 stock hook_DestroyActor(actorid) {
-    new success = DestroyActor(actorid);
+    new success = DestroyDynamicActor(actorid);
     if( success ) {
         for(new playerid, max_playerid = GetPlayerPoolSize(); playerid <= max_playerid; playerid ++) {
             if( !IsPlayerConnected(playerid) ) {

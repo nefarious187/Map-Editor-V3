@@ -1,4 +1,4 @@
-enum {
+enum _:E_CATMANAGER_GTD {
     Text: CATMANAGER_GTD_BG,
     Text: CATMANAGER_GTD_CAPTION,
     Text: CATMANAGER_GTD_CLOSE,
@@ -17,7 +17,7 @@ enum {
           CATMANAGER_GTDS
 }
 
-enum {
+enum _:E_CATMANAGER_PTD {
     PlayerText: CATMANAGER_PTD_TYPE_MODELS,
     PlayerText: CATMANAGER_PTD_TYPE_VEHICLES,
     PlayerText: CATMANAGER_PTD_TYPE_SKINS,

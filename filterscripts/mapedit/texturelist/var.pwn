@@ -1,4 +1,4 @@
-enum { // Generic Textdraws
+enum _:E_TEXTURELIST_GTD { // Generic Textdraws
     Text: TEXTURELIST_GTD_BG,         // Background
     Text: TEXTURELIST_GTD_CLOSE,      // Close Button
     Text: TEXTURELIST_GTD_PAGE_F,     // First Page
@@ -12,7 +12,7 @@ enum { // Generic Textdraws
           MAX_TEXTURELIST_GTDS
 }
 
-enum { // Player Textdraws
+enum _:E_TEXTURELIST_PTD { // Player Textdraws
     PlayerText: TEXTURELIST_PTD_CAPTION,                          // Caption / Title
     PlayerText: TEXTURELIST_PTD_PAGE,                             // Page / Page Input Button
     PlayerText: TEXTURELIST_PTD_CATEGORY,                         // Category / Category Select Button

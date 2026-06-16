@@ -1,4 +1,4 @@
-enum { // Generic Textdraws
+enum _:E_BUILDLIST_GTD { // Generic Textdraws
     Text: BUILDLIST_GTD_BG,     // Background
     Text: BUILDLIST_GTD_CLOSE,  // Close Button
     Text: BUILDLIST_GTD_PAGE_F, // First Page
@@ -8,7 +8,7 @@ enum { // Generic Textdraws
           MAX_BUILDLIST_GTDS
 }
 
-enum { // Player Textdraws
+enum _:E_BUILDLIST_PTD { // Player Textdraws
     PlayerText: BUILDLIST_PTD_CAPTION,                            // Caption / Title
     PlayerText: BUILDLIST_PTD_PAGE,                               // Current Page / Input Button
     PlayerText: BUILDLIST_PTD_INCMODE,                            // Including All, Removed, Existing / Button

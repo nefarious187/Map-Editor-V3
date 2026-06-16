@@ -1,5 +1,5 @@
 stock hook_CreatePickup(model, type, Float:X, Float:Y, Float:Z, virtualworld = 0) {
-    new pickupid = CreatePickup(model, type, X, Y, Z, virtualworld);
+    new pickupid = CreateDynamicPickup(model, type, X, Y, Z, virtualworld);
     if( pickupid != INVALID_PICKUP_ID ) {
         g_PickupData[pickupid][PICKUP_DATA_ISVALID] = true;
         g_PickupData[pickupid][PICKUP_DATA_MODEL] = model;
@@ -24,7 +24,7 @@ stock hook_CreatePickup(model, type, Float:X, Float:Y, Float:Z, virtualworld = 0
 stock hook_DestroyPickup(pickupid) {
     new isvalid = IsValidPickup(pickupid);
 
-    DestroyPickup(pickupid);
+    DestroyDynamicPickup(pickupid);
 
     if( isvalid ) {
         g_PickupData[pickupid][PICKUP_DATA_ISVALID] = false;

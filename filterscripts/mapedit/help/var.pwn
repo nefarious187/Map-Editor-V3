@@ -1,4 +1,4 @@
-enum {
+enum _:E_HELP_GTD {
     Text: HELP_GTD_BG,
     Text: HELP_GTD_CLOSE,
     Text: HELP_GTD_CAPTION,

@@ -30,6 +30,9 @@ public OnActorStreamIn(actorid, forplayerid) {
 #else
     #define _ALS_OnActorStreamIn
 #endif
+#if defined OnActorStreamIn
+    #undef OnActorStreamIn
+#endif
 #define OnActorStreamIn act_OnActorStreamIn
 #if defined act_OnActorStreamIn
     forward act_OnActorStreamIn(actorid, forplayerid);
@@ -147,6 +150,7 @@ public OnDialogResponse(playerid, dialogid, response, listitem, inputtext[]) {
                     } else {
                         g_PlayerData[playerid][PLAYER_DATA_EDIT_IDTYPE] = ID_TYPE_ACTOR;
                         g_PlayerData[playerid][PLAYER_DATA_EDIT_ID] = new_actorid;
+                        SelectList_FocusID(playerid, ID_TYPE_ACTOR, new_actorid);
                     }
                 }
                 case LISTITEM_ACTOR_COMMENT: {

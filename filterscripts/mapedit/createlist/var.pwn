@@ -1,4 +1,4 @@
-enum { // Generic Textdraws
+enum _:E_CREATELIST_GTD { // Generic Textdraws
     Text: CREATELIST_GTD_BG,         // Background
     Text: CREATELIST_GTD_CLOSE,      // Close Button
     Text: CREATELIST_GTD_PAGE_F,     // First Page
@@ -11,7 +11,7 @@ enum { // Generic Textdraws
           MAX_CREATELIST_GTDS
 }
 
-enum { // Player Textdraws
+enum _:E_CREATELIST_PTD { // Player Textdraws
     PlayerText: CREATELIST_PTD_CAPTION,                        // Caption / Title
     PlayerText: CREATELIST_PTD_PAGE,                           // Page / Page Input Button
     PlayerText: CREATELIST_PTD_CATEGORY,                       // Category / Category Select Button

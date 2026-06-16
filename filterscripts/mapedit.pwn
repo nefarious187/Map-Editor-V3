@@ -1,3 +1,5 @@
+#pragma compat 1
+#pragma warning disable 213, 214, 239
 #define SSCANF_NO_NICE_FEATURES
 
 #include <a_samp>
@@ -8,6 +10,12 @@
 #undef MAX_OBJECTS
 #define MAX_OBJECTS             10000
 
+#undef MAX_PICKUPS
+#define MAX_PICKUPS             10000
+
+#undef MAX_ACTORS
+#define MAX_ACTORS              10000
+
 #define IsValidObject           IsValidDynamicObject
 #define GetObjectPos            GetDynamicObjectPos
 #define GetObjectRot            GetDynamicObjectRot
@@ -17,6 +25,18 @@
 #define AttachCameraToObject    AttachCameraToDynamicObject
 #define EditObject              EditDynamicObject
 #define GetObjectModel(%0)      Streamer_GetIntData(STREAMER_TYPE_OBJECT, %0, E_STREAMER_MODEL_ID)
+
+#define IsValidActor            IsValidDynamicActor
+#define GetActorPos             GetDynamicActorPos
+#define SetActorPos             SetDynamicActorPos
+#define GetActorFacingAngle     GetDynamicActorFacingAngle
+#define SetActorFacingAngle     SetDynamicActorFacingAngle
+#define GetActorVirtualWorld    GetDynamicActorVirtualWorld
+#define SetActorVirtualWorld    SetDynamicActorVirtualWorld
+#define ApplyActorAnimation     ApplyDynamicActorAnimation
+#define ClearActorAnimations    ClearDynamicActorAnimations
+#define GetActorPoolSize()      Streamer_GetUpperBound(STREAMER_TYPE_ACTOR)
+#define OnActorStreamIn         OnDynamicActorStreamIn
 
 native IsValidVehicle(vehicleid);
 

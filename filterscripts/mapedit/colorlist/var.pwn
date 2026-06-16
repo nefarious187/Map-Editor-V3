@@ -1,4 +1,4 @@
-enum {
+enum _:E_COLORLIST_GTD {
     Text: COLORLIST_GTD_BG,                                // Background
     Text: COLORLIST_GTD_CLOSE,                             // Close
     Text: COLORLIST_GTD_PAGE_F,                            // First Page
@@ -8,7 +8,7 @@ enum {
           MAX_COLORLIST_GTDS
 }
 
-enum {
+enum _:E_COLORLIST_PTD {
     PlayerText: COLORLIST_PTD_CAPTION,                   // Caption
     PlayerText: COLORLIST_PTD_PAGE,                      // Current Page
     PlayerText: COLORLIST_PTD_SEARCH,                    // Current Search

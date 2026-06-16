@@ -378,6 +378,7 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid) {
                     g_PlayerData[playerid][PLAYER_DATA_EDIT_ID] = CreateObject(row_modelid, x, y, z, 0.0, 0.0, 0.0);
 
                     if(g_PlayerData[playerid][PLAYER_DATA_EDIT_ID] != INVALID_OBJECT_ID) {
+                        SelectList_FocusID(playerid, ID_TYPE_OBJECT, g_PlayerData[playerid][PLAYER_DATA_EDIT_ID]);
                         HidePlayerTextdrawMode(playerid);
                         ShowObjectDialog(playerid, DIALOGID_OBJECT_MAIN);
                     }
@@ -392,6 +393,7 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid) {
                     g_PlayerData[playerid][PLAYER_DATA_EDIT_ID] = CreateVehicle(row_modelid, x, y, z, 0.0, vehcol1, vehcol2, -1);
 
                     if( g_PlayerData[playerid][PLAYER_DATA_EDIT_ID] != INVALID_VEHICLE_ID ) {
+                        SelectList_FocusID(playerid, ID_TYPE_VEHICLE, g_PlayerData[playerid][PLAYER_DATA_EDIT_ID]);
                         HidePlayerTextdrawMode(playerid);
                         ShowVehicleDialog(playerid, DIALOGID_VEHICLE_MAIN);
                     }
@@ -401,6 +403,7 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid) {
                     g_PlayerData[playerid][PLAYER_DATA_EDIT_ID] = CreatePickup(row_modelid, 1, x, y, z);
 
                     if( g_PlayerData[playerid][PLAYER_DATA_EDIT_ID] != INVALID_PICKUP_ID ) {
+                        SelectList_FocusID(playerid, ID_TYPE_PICKUP, g_PlayerData[playerid][PLAYER_DATA_EDIT_ID]);
                         HidePlayerTextdrawMode(playerid);
                         ShowPickupDialog(playerid, DIALOGID_PICKUP_MAIN);
                     }
@@ -410,6 +413,7 @@ public OnPlayerClickPlayerTextDraw(playerid, PlayerText:playertextid) {
                     g_PlayerData[playerid][PLAYER_DATA_EDIT_ID] = CreateActor(row_modelid, x, y, z, 0.0);
 
                     if( g_PlayerData[playerid][PLAYER_DATA_EDIT_ID] != INVALID_ACTOR_ID ) {
+                        SelectList_FocusID(playerid, ID_TYPE_ACTOR, g_PlayerData[playerid][PLAYER_DATA_EDIT_ID]);
                         HidePlayerTextdrawMode(playerid);
                         ShowActorDialog(playerid, DIALOGID_ACTOR_MAIN);
                     }
