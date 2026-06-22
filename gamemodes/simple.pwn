@@ -1,16 +1,19 @@
 // Libraries
 #include <a_samp>
 #include <streamer>
+#include <sscanf2>
+#include <Pawn.CMD>
 #include <YSI_Coding\y_hooks>
 
 // Server versioning
 #define SERVER_VERSION_MAJOR 1
-#define SERVER_VERSION_MINOR 0
+#define SERVER_VERSION_MINOR 1
 #define SERVER_VERSION_PATCH 0
 
 // Modules
 #include "modules/utilities.pwn"
 #include "modules/spawn.pwn"
+#include "modules/commands.pwn"
 
 main()
 {

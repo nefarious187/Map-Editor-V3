@@ -3,7 +3,7 @@
 forward LoginSpawnPlayer(playerid);
 public LoginSpawnPlayer(playerid)
 {
-    TogglePlayerSpectating(playerid, false);
+    TogglePlayerSpectating(playerid, 0);
 }
 
 new g_SkinID[MAX_PLAYERS];
@@ -26,7 +26,7 @@ hook OnPlayerConnect(playerid)
     g_SkinID[playerid] = random(312);
     TogglePlayerSpectating(playerid, true);
     SetSpawnInfo(playerid, 1, g_SkinID[playerid], 0.0, 0.0, 0.0, 0.0, 0, 0, 0, 0, 0, 0);
-    SetTimerEx("LoginSpawnPlayer", 100, false, "i", playerid);
+    SetTimerEx("LoginSpawnPlayer", 100, 0, "i", playerid);
     return 1;
 }
 
